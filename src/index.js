@@ -12,10 +12,15 @@ const mongouri = process.env.MONGOURI;
 app.use(express.json());
 app.use("/api", userRoutes);
 
-// routes
-app.get("/", (req, res) => {
-  res.send("Welcome");
+const router = express.Router();
+
+router.get("/", (req, res) => {
+  const menu = {
+    users: `http://localhost:3000/api/users`,
+  };
+  res.send({ message: "Menu", body: menu });
 });
+app.use("/", router);
 
 //mongodb connection
 mongoose
